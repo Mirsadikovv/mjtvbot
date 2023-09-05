@@ -15,7 +15,7 @@ import logging
 from loader import dp
 
 
-@dp.message_handler(Command("start"))
+@dp.message_handler(Command("televizor"))
 async def show_menu(message: Message):
     logging.info(message)
     await message.answer("Выберите одно из следующих:", reply_markup=menu)

@@ -17,12 +17,6 @@ async def bot_start(message: types.Message):
 
 
 
-# @dp.message_handler(state=PersonalData.stst)
-# async def enter_test(message: types.Message):
-#     await message.reply("Ваше имя слишком короткое!")
-#     await PersonalData.fullName.set()
-
-
 @dp.message_handler(state=PersonalData.fullName)
 async def answer_fullname(message: types.Message, state: FSMContext):
     fullname = message.text
