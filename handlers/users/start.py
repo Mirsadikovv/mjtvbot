@@ -5,6 +5,8 @@ from loader import dp
 from states.personalData import PersonalData
 from aiogram.dispatcher import FSMContext
 
+from keyboards.default.menuKeyboard import televizor
+
 
 
 @dp.message_handler(CommandStart())
@@ -64,10 +66,11 @@ async def answer_phone(message: types.Message, state: FSMContext):
         msg += f"Ismingiz - {name}\n"
         msg += f"Email - {email}\n"
         msg += f"Telefon - {phone}"
-        await message.answer(msg)
+        await message.answer(msg, reply_markup=televizor)
 
         # State dan chiqaramiz
         # 1-variant
+
         await state.finish()
 
 # @dp.message_handler(content_types=['photo'])

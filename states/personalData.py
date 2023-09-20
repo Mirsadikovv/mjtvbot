@@ -8,3 +8,4 @@ class PersonalData(StatesGroup):
     fullName = State() # ism
     email = State() # email
     phoneNum = State() # Tel raqami
+    menuState = State()

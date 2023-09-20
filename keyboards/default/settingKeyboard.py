@@ -3,8 +3,8 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 setting = ReplyKeyboardMarkup(
     keyboard = [
         [
-            KeyboardButton(text='Узбекский'),
-            KeyboardButton(text='Русский'),
+            KeyboardButton(text='Профиль'),
+            KeyboardButton(text='Язык'),
         ],
         [KeyboardButton(text='Назад')]
     ],
