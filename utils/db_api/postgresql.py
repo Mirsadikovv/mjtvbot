@@ -1,4 +1,4 @@
-from data import config
+from ...data import config
 
 from typing import Union
 

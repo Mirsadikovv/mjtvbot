@@ -1,7 +1,7 @@
 import asyncio
 
-from postgresql import Database
-
+from .postgresql import Database
+# from utils.db_api.postgresql import Database
 
 async def test():
     db = Database()
