@@ -12,7 +12,7 @@ from aiogram.types import Message, CallbackQuery
 import logging
 
 
-from loader import dp
+from loader import dp,db,bot
 
 
 @dp.message_handler(text = "Televizor")
@@ -31,7 +31,15 @@ async def send_link(message: Message):
 
 @dp.message_handler(text='Мои подписки')
 async def send_link(message: Message):
-    await message.answer("В данный момент у вас нет активных подписок",reply_markup = menu)
+    user = await db.select_user_status(telegram_id = message.from_user.id)
+    for i in user:
+        if i == None:
+           await message.answer("В данный момент у вас нет активных подписок",reply_markup = menu)
+        elif i == "VIP":
+            await message.answer("У вас подписка VIP",reply_markup = menu)
+        elif i == "VIP plus":
+            await message.answer("У вас подписка VIP plus",reply_markup = menu)
+
 
 @dp.message_handler(text='⚙️ Настройки')
 async def send_link(message: Message):
