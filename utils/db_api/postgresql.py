@@ -1,10 +1,23 @@
-from ...data import config
+# from data import config
 
 from typing import Union
 
 import asyncpg
 from asyncpg import Connection
 from asyncpg.pool import Pool
+
+
+from environs import Env
+
+# environs kutubxonasidan foydalanish
+env = Env()
+env.read_env()
+
+DB_USER = env.str("DP_USER")
+DB_PASS = env.str("DP_PASS")
+DB_NAME = env.str("DP_NAME")
+DB_HOST = env.str("DP_HOST")
+
 
 
 class Database:
@@ -14,10 +27,10 @@ class Database:
 
     async def create(self):
         self.pool = await asyncpg.create_pool(
-            user=config.DB_USER,
-            password=config.DB_PASS,
-            host=config.DB_HOST,
-            database=config.DB_NAME
+            user=DB_USER,
+            password=DB_PASS,
+            host=DB_HOST,
+            database=DB_NAME
         )
 
     async def execute(self, command, *args,
@@ -45,7 +58,10 @@ class Database:
         id SERIAL PRIMARY KEY,
         full_name VARCHAR(255) NOT NULL,
         username varchar(255) NULL,
-        telegram_id BIGINT NOT NULL UNIQUE 
+        telegram_id BIGINT NOT NULL UNIQUE,
+        reg_time timestamp NOT NULL,
+        phone VARCHAR(255) NULL,
+        status VARCHAR(255) NULL   
         );
         """
         await self.execute(sql, execute=True)
@@ -59,7 +75,7 @@ class Database:
         return sql, tuple(parameters.values())
 
     async def add_user(self, full_name, username, telegram_id):
-        sql = "INSERT INTO users (full_name, username, telegram_id) VALUES($1, $2, $3) returning *"
+        sql = "INSERT INTO users (full_name, username, telegram_id, reg_time) VALUES($1, $2, $3, CURRENT_TIMESTAMP) returning *"
         return await self.execute(sql, full_name, username, telegram_id, fetchrow=True)
 
     async def select_all_users(self):
@@ -78,6 +94,10 @@ class Database:
     async def update_user_username(self, username, telegram_id):
         sql = "UPDATE Users SET username=$1 WHERE telegram_id=$2"
         return await self.execute(sql, username, telegram_id, execute=True)
+    
+    async def update_user_phone(self, phone, telegram_id):
+        sql = "UPDATE Users SET phone=$1 WHERE telegram_id=$2"
+        return await self.execute(sql, phone, telegram_id, execute=True)
 
     async def delete_users(self):
         await self.execute("DELETE FROM Users WHERE TRUE", execute=True)
