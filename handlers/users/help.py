@@ -8,6 +8,7 @@ from loader import dp
 async def bot_help(message: types.Message):
     text = ("Запросы: ",
             "/start - Запустить бота",
-            "/help - Помощь")
+            "/help - Помощь",
+            "Обратная связь - @hajimen1_bot")
     
     await message.answer("\n".join(text))

@@ -6,12 +6,20 @@ import logging
 from states.personalData import PersonalData
 # from keyboards.default.pythonKeyboard import menuPython
 
-from loader import dp
+from loader import dp,db 
 
 
 @dp.message_handler(text='Профиль')
 async def send_link(message: Message):
-    await message.answer(text = "Введите ваше полное имя:")
+    phone = await db.select_user_phone(telegram_id = message.from_user.id)
+    user = await db.select_user_status(telegram_id = message.from_user.id)
+    
+    for i in phone:
+        break
+    for j in user:
+        break
+
+    await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nСтатус - {j}")
     await PersonalData.fullName.set()
 
 @dp.message_handler(text='Язык')

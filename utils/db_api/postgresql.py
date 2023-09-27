@@ -91,6 +91,11 @@ class Database:
         sql = "SELECT status FROM Users WHERE "
         sql, parameters = self.format_args(sql, parameters=kwargs)
         return await self.execute(sql, *parameters, fetchrow=True)
+    
+    async def select_user_phone(self, **kwargs):
+        sql = "SELECT phone FROM Users WHERE "
+        sql, parameters = self.format_args(sql, parameters=kwargs)
+        return await self.execute(sql, *parameters, fetchrow=True)
 
     async def count_users(self):
         sql = "SELECT COUNT(*) FROM Users"
