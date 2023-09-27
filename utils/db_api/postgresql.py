@@ -61,7 +61,8 @@ class Database:
         telegram_id BIGINT NOT NULL UNIQUE,
         reg_time timestamp NOT NULL,
         phone VARCHAR(255) NULL,
-        status VARCHAR(255) NULL   
+        status VARCHAR(255) NULL,
+        lang VARCHAR(255) NOT NULL  
         );
         """
         await self.execute(sql, execute=True)
