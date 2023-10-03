@@ -20,3 +20,8 @@ async def send_ad_to_all(message: types.Message):
         user_id = user[3]
         await bot.send_photo(photo=photo_file, chat_id=user_id, caption="<a href = 'https://t.me/hajimeN1'>Подпишись!</a>")
         await asyncio.sleep(0.05)
+
+
+@dp.message_handler(text="/statistika", user_id=ADMINS)
+async def send_statistic_to_admins(message: types.Message):
+    pass

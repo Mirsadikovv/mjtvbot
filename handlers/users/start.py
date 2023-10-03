@@ -34,24 +34,27 @@ async def bot_start(message: types.Message):
 
 
 
-@dp.message_handler(content_types=[types.ContentType.CONTACT],state=PersonalData.phoneNum)
+@dp.message_handler(content_types=[types.ContentType.CONTACT, types.ContentType.TEXT],state=PersonalData.phoneNum)
 async def answer_phone(message: types.Message, state: FSMContext):
-    contact = message.contact
-    phone = contact.phone_number
-    print(phone)
-    # if len(phone)<9 or not phone.isdigit():
-    #     await message.answer("Ваше номер слишком короткий или не корректный!")
-    #     await PersonalData.phoneNum.set()
-    # else:   
-    await state.update_data({"phone": phone})
-    data = await state.get_data()
 
-    phone = data.get("phone")
-    await db.update_user_phone(phone = str(phone), telegram_id=message.from_user.id)
-    msg = "Ваши данные:\n"
-    msg += f"Имя - {message.from_user.full_name}\n"
-    msg += f"Номер - {phone}"
-    await message.answer(msg, reply_markup=televizor)
+    if message.content_type == types.ContentType.CONTACT:
+        contact = message.contact
+        phone = contact.phone_number
+        # print(phone)
 
-    await state.finish()
+        await state.update_data({"phone": phone})
+        data = await state.get_data()
+
+        phone = data.get("phone")
+        await db.update_user_phone(phone = str(phone), telegram_id=message.from_user.id)
+        msg = "Ваши данные:\n"
+        msg += f"Имя - {message.from_user.full_name}\n"
+        msg += f"Номер - {phone}"
+        await message.answer(msg, reply_markup=televizor)
+
+        await state.finish()
+
+    elif message.content_type == types.ContentType.TEXT:
+        await message.reply("Отправьте свой контакт пожалуйста)\nвам не сложно нам удобно)))")
+        await PersonalData.phoneNum.set()
 
