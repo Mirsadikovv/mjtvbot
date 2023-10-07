@@ -20,7 +20,6 @@ async def send_link(message: Message):
         break
 
     await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nСтатус - {j}")
-    await PersonalData.fullName.set()
 
 @dp.message_handler(text='Язык')
 async def send_link(message: Message):

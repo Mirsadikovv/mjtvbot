@@ -10,6 +10,6 @@ resize_keyboard = True)
 
 televizor = ReplyKeyboardMarkup(
     keyboard = [
-        [KeyboardButton(text = "Televizor")],
+        [KeyboardButton(text = "Давайте приступим🚀")],
     ],
 resize_keyboard = True)

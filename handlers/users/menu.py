@@ -12,9 +12,10 @@ import logging
 from loader import dp,db,bot
 
 
-@dp.message_handler(text = "Televizor")
+@dp.message_handler(text = "Давайте приступим🚀")
 async def show_menu(message: Message):
     logging.info(message)
+    await message.delete()
     await message.answer("Выберите одно из следующих:", reply_markup=menu)
 
 @dp.message_handler(text='Бесплатные каналы')
