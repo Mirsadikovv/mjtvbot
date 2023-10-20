@@ -17,9 +17,11 @@ async def send_link(message: Message):
     for i in phone:
         break
     for j in user:
+        if j == None:
+            j="Нет"  
         break
 
-    await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nСтатус - {j}")
+    await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nТарифы - {j}")
 
 @dp.message_handler(text='Язык')
 async def send_link(message: Message):

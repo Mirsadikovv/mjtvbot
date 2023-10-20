@@ -1,4 +1,3 @@
 from . import menuKeyboard
-from . import otzivKeyboard
+from . import tarifKeyboard
 from . import settingKeyboard
-from . import mainKeyboard

@@ -1,2 +1,1 @@
-from . import productsKeyboard
-from . import callback_data
+from . import product_keys

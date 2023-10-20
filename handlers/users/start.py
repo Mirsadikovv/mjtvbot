@@ -6,8 +6,9 @@ from states.personalData import PersonalData
 from aiogram.dispatcher import FSMContext
 import asyncpg 
 from data.config import ADMINS
-from keyboards.default.otzivKeyboard import nomer
+from keyboards.default.tarifKeyboard import nomer
 from keyboards.default.menuKeyboard import televizor
+from keyboards.default.menuKeyboard import menu
 
 
 @dp.message_handler(CommandStart())
@@ -50,8 +51,7 @@ async def answer_phone(message: types.Message, state: FSMContext):
         msg = "Ваши данные:\n"
         msg += f"Имя - {message.from_user.full_name}\n"
         msg += f"Номер - {phone}"
-        await message.answer(msg, reply_markup=televizor)
-
+        await message.answer(msg, reply_markup=menu)
         await state.finish()
 
     elif message.content_type == types.ContentType.TEXT:
