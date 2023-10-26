@@ -61,7 +61,8 @@ class Database:
         telegram_id BIGINT NOT NULL UNIQUE,
         reg_time timestamp NOT NULL,
         phone VARCHAR(255) NULL,
-        status VARCHAR(255) NULL  
+        status VARCHAR(255) NULL,
+        subscription_date timestamp NULL
         );
         """
         await self.execute(sql, execute=True)
@@ -81,6 +82,10 @@ class Database:
     async def select_all_users(self):
         sql = "SELECT * FROM Users"
         return await self.execute(sql, fetch=True)
+    
+    async def select_current_time(self):
+        sql = "SELECT CURRENT_TIMESTAMP"
+        return await self.execute(sql, fetch=True)
 
     async def select_user(self, **kwargs):
         sql = "SELECT * FROM Users WHERE "
@@ -96,6 +101,11 @@ class Database:
         sql = "SELECT phone FROM Users WHERE "
         sql, parameters = self.format_args(sql, parameters=kwargs)
         return await self.execute(sql, *parameters, fetchrow=True)
+    
+    async def select_user_status_endtime(self, **kwargs):
+        sql = "SELECT subscription_date + INTERVAL '1 month' FROM Users WHERE "
+        sql, parameters = self.format_args(sql, parameters=kwargs)
+        return await self.execute(sql, *parameters, fetchrow=True)
 
     async def count_users(self):
         sql = "SELECT COUNT(*) FROM Users"
@@ -108,10 +118,25 @@ class Database:
     async def update_user_phone(self, phone, telegram_id):
         sql = "UPDATE Users SET phone=$1 WHERE telegram_id=$2"
         return await self.execute(sql, phone, telegram_id, execute=True)
+    
+    async def update_user_status(self,status, telegram_id):
+        sql = "UPDATE Users SET status=$1 WHERE telegram_id=$2"
+        return await self.execute(sql, status, telegram_id, execute=True)
+    
+    async def update_user_endtime(self, telegram_id):
+        sql = "UPDATE Users SET subscription_date=None WHERE telegram_id=$1"
+        return await self.execute(sql, telegram_id, execute=True)
+    
+    async def update_user_status_date(self, telegram_id):
+        sql = "UPDATE Users SET subscription_date=CURRENT_TIMESTAMP WHERE telegram_id=$1"
+        return await self.execute(sql, telegram_id, execute=True)
 
     async def delete_users(self):
         await self.execute("DELETE FROM Users WHERE TRUE", execute=True)
 
     async def drop_users(self):
         await self.execute("DROP TABLE Users", execute=True)
-        
+
+    # async def drop_users(self):
+    #         await self.execute("DROP TABLE Users", execute=True)
+            

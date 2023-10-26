@@ -3,7 +3,7 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import CallbackQuery, Message
 from data.config import ADMINS
 
-from loader import dp, bot
+from loader import dp,db,bot
 from data.products import ds_vip, ds_sport
 from keyboards.inline.product_keys import build_keyboard
 
@@ -34,7 +34,7 @@ async def VIP_plus_invoice(call: CallbackQuery):
     await call.answer()
 
 @dp.callback_query_handler(text="product:sport")
-async def VIP_plus_invoice(call: CallbackQuery):
+async def sport_invoice(call: CallbackQuery):
     await bot.send_invoice(chat_id=call.from_user.id,
                            **ds_sport.generate_invoice(),
                            payload="payload:sport")
@@ -48,9 +48,36 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
                                         ok=True)
     await bot.send_message(chat_id=pre_checkout_query.from_user.id,
                            text="Спасибо за покупку!")
+    
     await bot.send_message(chat_id=ADMINS[0],
                            text=f"Куплено: {pre_checkout_query.invoice_payload}\n"
                                 f"ID: {pre_checkout_query.id}\n"
                                 f"Пользователь: {pre_checkout_query.from_user.first_name}\n"                                
                                 f"Покупатель: {pre_checkout_query.order_info.name}, тел: {pre_checkout_query.order_info.phone_number}\n\n"
                                 f"Telegram id: {pre_checkout_query.from_user.id}\n")
+    status = await db.select_user_status(telegram_id = pre_checkout_query.from_user.id)
+
+    for i in status:
+        status = i
+        break
+    # print("Dsfffffffffffffff",status,pre_checkout_query.invoice_payload)
+
+    if pre_checkout_query.invoice_payload == 'payload:sport' and status == "VIP":
+        await db.update_user_status(status="VIPandsport",telegram_id=pre_checkout_query.from_user.id)
+        await db.update_user_status_date(telegram_id = pre_checkout_query.from_user.id)
+
+    elif pre_checkout_query.invoice_payload == 'payload:VIP' and status == "sport":
+        await db.update_user_status(status="VIPandsport",telegram_id=pre_checkout_query.from_user.id)
+        await db.update_user_status_date(telegram_id = pre_checkout_query.from_user.id)
+    
+    elif pre_checkout_query.invoice_payload == 'payload:sport':
+        await db.update_user_status(status="sport",telegram_id=pre_checkout_query.from_user.id)
+        await db.update_user_status_date(telegram_id = pre_checkout_query.from_user.id)
+
+    elif pre_checkout_query.invoice_payload == 'payload:VIP':
+        await db.update_user_status(status="VIP",telegram_id=pre_checkout_query.from_user.id)
+        await db.update_user_status_date(telegram_id = pre_checkout_query.from_user.id)
+
+    
+    
+    
