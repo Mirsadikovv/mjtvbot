@@ -9,7 +9,7 @@ from states.personalData import PersonalData
 from loader import dp,db 
 
 
-@dp.message_handler(text='Профиль')
+@dp.message_handler(text='Профиль👤')
 async def send_link(message: Message):
     phone = await db.select_user_phone(telegram_id = message.from_user.id)
     user = await db.select_user_status(telegram_id = message.from_user.id)
@@ -23,12 +23,12 @@ async def send_link(message: Message):
 
     await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nТарифы - {j}")
 
-@dp.message_handler(text='Язык')
+@dp.message_handler(text='Язык🇺🇿🇷🇺🇬🇧')
 async def send_link(message: Message):
     await message.answer(text = "На данный момент наш бот работает только на русском")
 
 
-@dp.message_handler(text='Назад')
+@dp.message_handler(text='Назад🔙')
 async def send_link(message: Message):
     logging.info(message)
     await message.answer("Выберите одно из следующих:",reply_markup = menu)

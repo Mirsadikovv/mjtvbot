@@ -30,7 +30,7 @@ tarif_VIP = ReplyKeyboardMarkup(
             KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/index.html")),
             KeyboardButton(text='Sport'),
         ],
-        [KeyboardButton(text='Назад')]
+        [KeyboardButton(text='Назад🔙')]
     ],
     resize_keyboard=True
 )
@@ -41,7 +41,7 @@ tarif_VIPandsport = ReplyKeyboardMarkup(
             KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/index.html")),
             KeyboardButton(text='Sport'),
         ],
-        [KeyboardButton(text='Назад')]
+        [KeyboardButton(text='Назад🔙')]
     ],
     resize_keyboard=True
 )

@@ -17,7 +17,7 @@ async def send_link(message: Message):
     await message.answer_photo(photo,caption = "В тариф Sport входит",reply_markup=build_keyboard("sport"))
 
 
-@dp.message_handler(text='Назад')
+@dp.message_handler(text='Назад🔙')
 async def send_link(message: Message):
     logging.info(message)
     await message.answer("Выберите одно из следующих:",reply_markup = menu)

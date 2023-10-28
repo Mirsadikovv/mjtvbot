@@ -114,7 +114,7 @@ async def send_link(message: Message):
 
 
 
-@dp.message_handler(text='Мои подписки')
+@dp.message_handler(text='Мои подписки✅')
 async def send_link(message: Message):
     user = await db.select_user_status(telegram_id = message.from_user.id)
     for i in user:
@@ -156,7 +156,7 @@ async def send_link(message: Message):
 async def send_link(message: Message):
     await message.answer("Выберите что хотите изменить:",reply_markup = setting)
 
-@dp.message_handler(text='Назад')
+@dp.message_handler(text='Назад🔙')
 async def send_link(message: Message):
     await message.answer(text = "Выберите действие:", reply_markup = menu)
 

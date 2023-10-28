@@ -6,6 +6,7 @@ from data.config import ADMINS
 from loader import dp,db,bot
 from data.products import ds_vip, ds_sport
 from keyboards.inline.product_keys import build_keyboard
+from keyboards.default.menuKeyboard import menu
 
 
 @dp.message_handler(Command("VIP"))
@@ -47,7 +48,7 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
     await bot.answer_pre_checkout_query(pre_checkout_query_id=pre_checkout_query.id,
                                         ok=True)
     await bot.send_message(chat_id=pre_checkout_query.from_user.id,
-                           text="Спасибо за покупку!")
+                           text="Спасибо за покупку!",reply_markup=menu)
     
     await bot.send_message(chat_id=ADMINS[0],
                            text=f"Куплено: {pre_checkout_query.invoice_payload}\n"
