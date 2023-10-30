@@ -7,6 +7,8 @@ from loader import dp,db,bot
 from data.products import ds_vip, ds_sport
 from keyboards.inline.product_keys import build_keyboard
 from keyboards.default.menuKeyboard import menu
+from states.personalData import invoys
+from aiogram.dispatcher import FSMContext
 
 
 @dp.message_handler(Command("VIP"))
@@ -28,28 +30,38 @@ async def show_invoices(message: types.Message):
 
 
 @dp.callback_query_handler(text="product:VIP")
-async def VIP_plus_invoice(call: CallbackQuery):
-    await bot.send_invoice(chat_id=call.from_user.id,
+async def VIP_plus_invoice(call: CallbackQuery,state: FSMContext):
+    invo1 = await bot.send_invoice(chat_id=call.from_user.id,
                            **ds_vip.generate_invoice(),
                            payload="payload:VIP")
+    await state.update_data({"invo1": invo1.message_id})
     await call.answer()
 
 @dp.callback_query_handler(text="product:sport")
-async def sport_invoice(call: CallbackQuery):
-    await bot.send_invoice(chat_id=call.from_user.id,
+async def sport_invoice(call: CallbackQuery, state: FSMContext):
+    invo2 = await bot.send_invoice(chat_id=call.from_user.id,
                            **ds_sport.generate_invoice(),
                            payload="payload:sport")
+    await state.update_data({"invo2": invo2.message_id})   
     await call.answer()
 
-
+# await state.update_data({"phone": phone})
+#         data = await state.get_data()
 
 @dp.pre_checkout_query_handler()
-async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery):
+async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery, state: FSMContext):
     await bot.answer_pre_checkout_query(pre_checkout_query_id=pre_checkout_query.id,
                                         ok=True)
     await bot.send_message(chat_id=pre_checkout_query.from_user.id,
                            text="Спасибо за покупку!",reply_markup=menu)
-    
+    data = await state.get_data()
+    print(data)
+    # print(data[0])
+    # print(data["invo2"])
+    if pre_checkout_query.invoice_payload == 'payload:sport':
+        await dp.bot.delete_message(chat_id=pre_checkout_query.from_user.id,message_id=data["invo2"])
+    elif pre_checkout_query.invoice_payload == 'payload:VIP':
+        await dp.bot.delete_message(chat_id=pre_checkout_query.from_user.id,message_id=data["invo1"])
     await bot.send_message(chat_id=ADMINS[0],
                            text=f"Куплено: {pre_checkout_query.invoice_payload}\n"
                                 f"ID: {pre_checkout_query.id}\n"

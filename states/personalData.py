@@ -12,4 +12,7 @@ class PersonalData(StatesGroup):
 class tg_id(StatesGroup):
     state1 = State()
     state2 = State() # ism
-    
+
+class invoys(StatesGroup):
+    state11 = State()
+    state22 = State() # ism

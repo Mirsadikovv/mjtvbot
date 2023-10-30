@@ -17,7 +17,7 @@ tarif_sport = ReplyKeyboardMarkup(
     keyboard = [
         [
             KeyboardButton(text='VIP'),
-            KeyboardButton(text='Sport'),
+            KeyboardButton(text='Sport', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/sport.html")),
         ],
         [KeyboardButton(text='Назад')]
     ],
@@ -27,8 +27,8 @@ tarif_sport = ReplyKeyboardMarkup(
 tarif_VIP = ReplyKeyboardMarkup(
     keyboard = [
         [
-            KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/index.html")),
-            KeyboardButton(text='Sport'),
+            KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/vip.html")),
+            KeyboardButton(text='Sport', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/sport.html")),
         ],
         [KeyboardButton(text='Назад🔙')]
     ],
@@ -38,8 +38,8 @@ tarif_VIP = ReplyKeyboardMarkup(
 tarif_VIPandsport = ReplyKeyboardMarkup(
     keyboard = [
         [
-            KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/index.html")),
-            KeyboardButton(text='Sport'),
+            KeyboardButton(text='VIP', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/vip.html")),
+            KeyboardButton(text='Sport', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/sport.html")),
         ],
         [KeyboardButton(text='Назад🔙')]
     ],
@@ -60,6 +60,10 @@ nomer = ReplyKeyboardMarkup(
     keyboard = [
         [
             KeyboardButton(text='Отправить мой номер',request_contact=True),
+            
+        ],
+        [
+            KeyboardButton(text='Пропустить'),
             
         ],
         

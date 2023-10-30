@@ -124,7 +124,7 @@ class Database:
         return await self.execute(sql, status, telegram_id, execute=True)
     
     async def update_user_endtime(self, telegram_id):
-        sql = "UPDATE Users SET subscription_date=None WHERE telegram_id=$1"
+        sql = "UPDATE Users SET subscription_date=NULL WHERE telegram_id=$1"
         return await self.execute(sql, telegram_id, execute=True)
     
     async def update_user_status_date(self, telegram_id):

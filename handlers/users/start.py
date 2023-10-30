@@ -53,8 +53,12 @@ async def answer_phone(message: types.Message, state: FSMContext):
         msg += f"Номер - {phone}"
         await message.answer(msg, reply_markup=menu)
         await state.finish()
+    
+    elif message.text == "Пропустить":
+        await message.answer("Но имейте ввиду что без номера телефона невозможна покупка тарифов!", reply_markup=menu)
+        await state.finish()
 
     elif message.content_type == types.ContentType.TEXT:
-        await message.reply("Отправьте свой контакт пожалуйста)\nвам не сложно нам удобно)))")
+        await message.reply("Отправьте свой контакт пожалуйста)\nОн потребуется для дальнейшего использования бота и покупки тарифов)")
         await PersonalData.phoneNum.set()
 

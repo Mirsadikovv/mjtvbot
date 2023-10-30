@@ -17,7 +17,7 @@ admin_panel = ReplyKeyboardMarkup(
             KeyboardButton(text='Подписка 🪓'),
             KeyboardButton(text='Tanish bilish😎'),
         ],
-        [KeyboardButton(text='Реклама'),KeyboardButton(text='База пользователей')],
+        [KeyboardButton(text='Реклама📣'),KeyboardButton(text='База пользователей📊')],
         [KeyboardButton(text='Назад🔙')]
     ],
     resize_keyboard=True
@@ -26,8 +26,8 @@ admin_panel = ReplyKeyboardMarkup(
 reklama = ReplyKeyboardMarkup(
     keyboard = [
         [
-            KeyboardButton(text='Создать рекламу'),
-            KeyboardButton(text='Рассылка'),
+            # KeyboardButton(text='Создать рекламу'),
+            KeyboardButton(text='Рассылка📢'),
         ],
         [KeyboardButton(text='Назад')]
     ],
