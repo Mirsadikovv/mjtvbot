@@ -137,6 +137,11 @@ class Database:
     async def drop_users(self):
         await self.execute("DROP TABLE Users", execute=True)
 
+    async def alter_table(self):
+        sql = "ALTER TABLE users ADD COLUMN subscription_date TIMESTAMP"
+        return await self.execute(sql)
+
+
     # async def drop_users(self):
     #         await self.execute("DROP TABLE Users", execute=True)
             

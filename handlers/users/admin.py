@@ -125,8 +125,8 @@ async def send_link(message: Message):
 @dp.message_handler(text="Рассылка📢", user_id=ADMINS)
 async def send_ad_to_all(message: types.Message):
     users = await db.select_all_users()
-    # photo_file = "AgACAgIAAxkBAAIFhmUUR_bj0Ipe4azYDN3-0vWUe25BAALG0jEbRMqgSL_L3iwnfmPEAQADAgADeAADMAQ"
-    photo_file = "AgACAgIAAxkBAAIIsWU-dNV3mjY6QFi1hGo_ZBI7nNydAAJlzjEbVCjwSaQlTkeNrx7nAQADAgADeQADMAQ"
+    photo_file = "AgACAgIAAxkBAAIKRWVBL9kiMOC-qL5GVel5ZhsTjVwBAALG0jEbRMqgSDN8vC1W8TqgAQADAgADeAADMwQ"
+    # photo_file = "AgACAgIAAxkBAAIIsWU-dNV3mjY6QFi1hGo_ZBI7nNydAAJlzjEbVCjwSaQlTkeNrx7nAQADAgADeQADMAQ"
     
     # print(photo_file)
     file2 = open("blocked_baza.txt","w")

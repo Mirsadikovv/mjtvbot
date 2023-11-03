@@ -6,16 +6,16 @@ from utils.misc.product import Product
 
 ds_vip = Product(
     title="VIP",
-    description="Чтобы купить VIP подписку нажмите эту кнопку",
+    description="Оплатите чтобы купить подписку VIP",
     currency="UZS",
     prices=[
         LabeledPrice(
             label='Подписка VIP',
-            amount=2500000, 
+            amount=2200000, 
         ),
         LabeledPrice(
             label='Скидка о админа',
-            amount=-600000, 
+            amount=-500000, 
         ),
     ],
     start_parameter="create_invoice_ds_vip",
@@ -33,17 +33,17 @@ ds_vip = Product(
 
 
 ds_sport = Product(
-    title="sport",
-    description="Чтобы купить Sport подписку нажмите эту кнопку",
+    title="Sport",
+    description="Оплатите чтобы купить подписку Sport",
     currency="UZS",
     prices=[
         LabeledPrice(
             label='Подписка на Sport',
-            amount=2000000, 
+            amount=1600000, 
         ),
         LabeledPrice(
             label='Скидка от админа',
-            amount=-500000,
+            amount=-300000,
         ),
     ],
     start_parameter="create_invoice_ds_vip",

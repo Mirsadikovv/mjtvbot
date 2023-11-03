@@ -21,7 +21,7 @@ async def send_link(message: Message):
             j="Нет"  
         break
 
-    await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nТарифы - {j}")
+    await message.answer(text = f"Ваши данные:\nИмя - {message.from_user.full_name}\nНомер - {i}\nТарифы - {j}\n\nЧтобы редактировать данные нажмите на /start")
 
 @dp.message_handler(text='Язык🇺🇿🇷🇺🇬🇧')
 async def send_link(message: Message):

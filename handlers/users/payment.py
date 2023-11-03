@@ -11,21 +11,21 @@ from states.personalData import invoys
 from aiogram.dispatcher import FSMContext
 
 
-@dp.message_handler(Command("VIP"))
-async def show_invoices(message: types.Message):
-    caption = "<b>Подписка VIP</b> .\n\n"
-    caption += "Цена: <b>25 000 сум</b>\n"
-    caption += "Скидка от админа: <b>-6 000 сум</b>"
-    await message.answer_photo(photo="https://avatars.mds.yandex.net/i?id=e4e2d6728f62814504ae458a29efaafe-4265706-images-thumbs&n=13",
-                         caption=caption, reply_markup=build_keyboard("VIP"))
+# @dp.message_handler(Command("VIP"))
+# async def show_invoices(message: types.Message):
+#     caption = "<b>Подписка VIP</b> .\n\n"
+#     caption += "Цена: <b>25 000 сум</b>\n"
+#     caption += "Скидка от админа: <b>-6 000 сум</b>"
+#     await message.answer_photo(photo="https://avatars.mds.yandex.net/i?id=e4e2d6728f62814504ae458a29efaafe-4265706-images-thumbs&n=13",
+#                          caption=caption, reply_markup=build_keyboard("VIP"))
 
-@dp.message_handler(Command("sport"))
-async def show_invoices(message: types.Message):
-    caption = "<b>Подписка Sport</b> .\n\n"
-    caption += "Цена: <b>20 000 сум</b>\n"
-    caption += "Скидка от админа: <b>-5 000 сум</b>"
-    await message.answer_photo(photo="https://avatars.mds.yandex.net/i?id=aa319fae26d038194a903b6c48b0780d4054b34f-9844228-images-thumbs&n=13",
-                         caption=caption, reply_markup=build_keyboard("sport"))
+# @dp.message_handler(Command("sport"))
+# async def show_invoices(message: types.Message):
+#     caption = "<b>Подписка Sport</b> .\n\n"
+#     caption += "Цена: <b>20 000 сум</b>\n"
+#     caption += "Скидка от админа: <b>-5 000 сум</b>"
+#     await message.answer_photo(photo="https://avatars.mds.yandex.net/i?id=aa319fae26d038194a903b6c48b0780d4054b34f-9844228-images-thumbs&n=13",
+#                          caption=caption, reply_markup=build_keyboard("sport"))
 
 
 
@@ -68,6 +68,7 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery,
                                 f"Пользователь: {pre_checkout_query.from_user.first_name}\n"                                
                                 f"Покупатель: {pre_checkout_query.order_info.name}, тел: {pre_checkout_query.order_info.phone_number}\n\n"
                                 f"Telegram id: {pre_checkout_query.from_user.id}\n")
+    await db.update_user_phone(telegram_id=pre_checkout_query.from_user.id,phone=pre_checkout_query.order_info.phone_number)
     status = await db.select_user_status(telegram_id = pre_checkout_query.from_user.id)
 
     for i in status:

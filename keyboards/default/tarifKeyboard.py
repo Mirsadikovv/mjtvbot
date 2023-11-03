@@ -8,7 +8,7 @@ tarif = ReplyKeyboardMarkup(
             KeyboardButton(text='VIP'),
             KeyboardButton(text='Sport'),
         ],
-        [KeyboardButton(text='Назад')]
+        [KeyboardButton(text='Назад🔙')]
     ],
     resize_keyboard=True
 )
@@ -19,7 +19,7 @@ tarif_sport = ReplyKeyboardMarkup(
             KeyboardButton(text='VIP'),
             KeyboardButton(text='Sport', web_app=WebAppInfo(url = "https://i3cpu.github.io/mj-tv-bot/sport.html")),
         ],
-        [KeyboardButton(text='Назад')]
+        [KeyboardButton(text='Назад🔙')]
     ],
     resize_keyboard=True
 )

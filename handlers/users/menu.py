@@ -17,7 +17,7 @@ from loader import dp,db,bot
 
 
 
-@dp.message_handler(text='Тарифы')
+@dp.message_handler(text='Просмотр по подписке')
 async def send_link(message: Message):
     status = await db.select_user_status(telegram_id = message.from_user.id)
     for i in status:
@@ -114,7 +114,7 @@ async def send_link(message: Message):
 
 
 
-@dp.message_handler(text='Мои подписки✅')
+@dp.message_handler(text='☑️ Мои подписки')
 async def send_link(message: Message):
     user = await db.select_user_status(telegram_id = message.from_user.id)
     for i in user:

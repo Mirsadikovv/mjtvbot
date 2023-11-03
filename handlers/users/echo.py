@@ -1,5 +1,5 @@
 from aiogram import types
-
+from keyboards.default.menuKeyboard import menu
 from loader import dp
 import logging
 
@@ -10,10 +10,10 @@ import logging
 
 
 
-# @dp.message_handler(state=None)
-# async def bot_echo(message: types.Message):
-#     logging.info(message)
-#     await message.answer(message.text + "  /start")
+@dp.message_handler(state=None)
+async def bot_echo(message: types.Message):
+    logging.info(message)
+    await message.answer("Выберите действие",reply_markup=menu)
 
 @dp.message_handler(state=None, content_types=types.ContentType.PHOTO)
 async def photo_id(message: types.Message):
