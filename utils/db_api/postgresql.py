@@ -13,10 +13,10 @@ from environs import Env
 env = Env()
 env.read_env()
 
-DB_USER = env.str("DP_USER")
-DB_PASS = env.str("DP_PASS")
-DB_NAME = env.str("DP_NAME")
-DB_HOST = env.str("DP_HOST")
+DB_USER = "postgres"
+DB_PASS = "1212"
+DB_NAME = "telegram_bot"
+DB_HOST = "5432"
 
 
 
