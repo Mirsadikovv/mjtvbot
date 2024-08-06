@@ -10,11 +10,11 @@ ADMINS = ["833391285"]  # adminlar ro'yxati
 IP = "10.2.44.246"  # Xosting ip manzili
 
 
-DP_USER = env.str("DP_USER")
-DP_PASS = env.str("DP_PASS")
-DP_NAME = env.str("DP_NAME")
-DP_HOST = env.str("DP_HOST")
-PROVIDER_TOKEN = env.str("PROVIDER_TOKEN")
+DP_USER = "postgres"
+DP_PASS = "1212"
+DP_NAME = "telegram_bot"
+DP_HOST = "5432"
+PROVIDER_TOKEN = "PROVIDER_TOKEN"
 
 # import os
 
